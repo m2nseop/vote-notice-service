@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <div class="head">
+        <h1>게시판 프로젝트</h1>
+        <div th:if="${session.loginMember != null}" class="top_menu">
+            <div class="login_user"><strong><i class="far fa-user-circle"></i> [[ ${session.loginMember.name} ]]</strong>님 반갑습니다.</div>
+                <div class="logout">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit"><span class="skip_info">로그아웃</span><i class="fas fa-sign-out-alt"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div layout:fragment="content" class="content">
+        <h2>This is Content</h2>
+        <hr>
+        <table border="1">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+            </tr>
+            <th:block th:each="student : ${studentList}">
+                <tr>
+                    <td th:text="${ student.id }"></td>
+                    <td th:text="${ student.name }"></td>
+                    <td th:text="${ student.email }"></td>
+                </tr>
+            </th:block>
+        </table>
+        <a href="">로그아웃</a>
+    </div>
+</body>
+</html>
