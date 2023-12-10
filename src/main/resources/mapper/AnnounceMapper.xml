@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.univ.VoteProject.Announce.AnnounceRepository">
+    <insert id="createAnnounceAgenda" parameterType="Announce">
+        INSERT INTO announce_list (id, ann_title, ann_content, ann_period, media_id, target_scope)
+        VALUES (#{id}, #{annTitle}, #{annContent},#{annPeriod}, #{mediaId}, #{targetScope})
+    </insert>
+
+    <!-- 회원 상세정보 조회 -->
+    <select id="getAnnounceList" resultType="Announce">
+        SELECT * FROM announce_list
+    </select>
+</mapper>

@@ -1,0 +1,58 @@
+<!-- createAnnounce.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Announce</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <style>
+        .input_layout {
+            display: block;
+        }
+
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="layout/header :: header"></div>
+    <div>
+        <h2>새로운 공지사항 생성</h2>
+        <!-- 폼 시작 -->
+        <form th:action="@{/announce/create.do}" th:method="post" th:object="${announce}">
+            <!-- Announce 속성 입력 -->
+            <div class="input_layout">
+                <label for="annTitle">제목</label>
+                <input type="text" id="annTitle" th:field="*{annTitle}" />
+            </div>
+
+            <div class="input_layout">
+                <label for="annContent">내용</label>
+                <input type="text" id="annContent" th:field="*{annContent}" />
+            </div>
+
+            <div class="input_layout">
+                <label for="annPeriod">게시 기한</label>
+                <input type="datetime-local" id="annPeriod" th:field="*{annPeriod}" />
+            </div>
+
+<!--            <div class="input_layout">-->
+<!--                <label for="mediaId">Media ID:</label>-->
+<!--                <input type="number" id="mediaId" th:field="*{mediaId}" />-->
+<!--            </div>-->
+
+            <div class="input_layout">
+                <label for="targetScope">게시 범위</label>
+                <input type="text" id="targetScope" th:field="*{targetScope}" />
+            </div>
+
+            <!-- 제출 버튼 -->
+            <button type="submit">공지사항 생성</button>
+        </form>
+        <!-- 폼 끝 -->
+
+        <!-- 다양한 필요한 내용 추가 -->
+    </div>
+</body>
+</html>

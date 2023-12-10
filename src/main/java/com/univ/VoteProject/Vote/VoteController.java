@@ -19,7 +19,7 @@ public class VoteController {
     VoteService voteService;
 
     @GetMapping("/vote/create.do")
-    public String createVoteItemForm(Model model) {
+    public String createVoteForm(Model model) {
         model.addAttribute("vote", new Vote());
         System.out.println("wlsWk?");
         return "vote/create_vote";

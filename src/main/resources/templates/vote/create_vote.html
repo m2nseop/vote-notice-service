@@ -27,6 +27,11 @@
             </div>
 
             <div class="input_layout">
+                <label for="title">내용</label>
+                <input type="text" id="content" name="content" th:field="*{content}" required>
+            </div>
+
+            <div class="input_layout">
                 <label for="votePeriod">투표 기한</label>
                 <input type="datetime-local" id="votePeriod" name="votePeriod" th:field="*{votePeriod}" required>
             </div>

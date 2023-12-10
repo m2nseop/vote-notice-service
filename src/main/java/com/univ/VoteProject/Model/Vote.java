@@ -6,6 +6,7 @@ public class Vote {
     private int voteId;
     private String id;
     private String title;
+    private String content;
     private int mediaId;
     private LocalDateTime votePeriod;
     private String targetScope;
@@ -25,6 +26,12 @@ public class Vote {
 
     public String getTitle() {
         return title;
+    }
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getMediaId() {
