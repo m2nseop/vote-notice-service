@@ -6,7 +6,6 @@ import lombok.Data;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.util.StringUtils;
 
-@Builder @Data
 public class Student {
     private String id;
     private String password;

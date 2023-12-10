@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.univ.VoteProject.Vote.VoteRepository">
+    <!-- 투표 안건 생성 -->
+    <insert id="createVoteAgenda" parameterType="Vote">
+        INSERT INTO vote_list (id, title, media_id, vote_period, target_scope, attendance_type, anonymity_type, qr_id)
+        VALUES (#{id}, #{title}, #{mediaId}, #{votePeriod}, #{targetScope}, #{attendanceType}, #{anonymityType}, #{qrId})
+    </insert>
+
+    <select id="getVoteList" resultType="Vote">
+        SELECT * FROM vote_list
+    </select>
+</mapper>

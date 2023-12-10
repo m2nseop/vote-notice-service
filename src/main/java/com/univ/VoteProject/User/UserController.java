@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    private Map<String, LoginRequest> loginAttemptsMap = new HashMap<>();
+//    private Map<String, LoginRequest> loginAttemptsMap = new HashMap<>();
 
     @PostMapping("/user/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {

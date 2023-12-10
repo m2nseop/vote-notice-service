@@ -3,39 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <style>
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            margin-x: auto;
+        }
+
+        .list-container {
+            width: 45%; /* 각 목록이 50%의 너비를 가지도록 설정 */
+            border-right: 1px solid white;
+        }
+
+        /* 각 목록의 스타일을 추가적으로 설정할 수 있습니다. */
+        .list-container h2 {
+            color: #333;
+            border-bottom: 1px solid white;
+            padding: 10px;
+        }
+
+        /* 필요에 따라 더 많은 스타일을 추가할 수 있습니다. */
+    </style>
 </head>
+<link>
 <body>
-<header>
-    <div class="head">
-        <h1>게시판 프로젝트</h1>
-        <div th:if="${session.loginMember != null}" class="top_menu">
-            <div class="login_user"><strong><i class="far fa-user-circle"></i> [[ ${session.loginMember.name} ]]</strong>님 반갑습니다.</div>
-                <div class="logout">
-                    <form th:action="@{/logout}" method="post">
-                        <button type="submit"><span class="skip_info">로그아웃</span><i class="fas fa-sign-out-alt"></i></button>
-                    </form>
-                </div>
-            </div>
+<div th:replace="layout/header :: header"></div>
+<div layout:fragment="content" class="content">
+    <div class="list-container" style="background-color: lightgray;">
+        <div>
+            <h2>투표 안건 목록</h2>
         </div>
-    </header>
-    <div layout:fragment="content" class="content">
-        <h2>This is Content</h2>
-        <hr>
-        <table border="1">
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>email</th>
-            </tr>
-            <th:block th:each="student : ${studentList}">
-                <tr>
-                    <td th:text="${ student.id }"></td>
-                    <td th:text="${ student.name }"></td>
-                    <td th:text="${ student.email }"></td>
-                </tr>
-            </th:block>
-        </table>
-        <a href="">로그아웃</a>
+        <div style="height: 600px">
+
+        </div>
     </div>
+
+    <div class="list-container" style="background-color: lightgray;">
+        <div>
+            <h2>공지사항 목록</h2>
+        </div>
+        <div style="height: 200px">
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

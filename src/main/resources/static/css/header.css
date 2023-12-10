@@ -1,0 +1,45 @@
+header {
+    background-color: #003876;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top_menu {
+    display: flex;
+    align-items: center;
+}
+
+.login_user,
+.logout {
+    margin-right: 20px;
+}
+
+.login_user strong {
+    margin-right: 5px;
+}
+
+.logout button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.logout button .skip_info {
+    margin-right: 5px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}

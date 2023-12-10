@@ -1,0 +1,25 @@
+<!-- header.html -->
+<header>
+  <div class="head">
+    <div th:if="${session.loginMember != null}" class="top_menu">
+      <div class="login_user">
+        <strong><i class="far fa-user-circle"></i> [[ ${session.loginMember.name} ]]</strong>님 반갑습니다.
+      </div>
+      <div class="logout">
+        <form th:action="@{/logout}" method="post">
+          <button type="submit"><span class="skip_info">로그아웃</span><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+      </div>
+      <div style="border-right: 1px solid white; padding: 0 10px">
+        <a th:href="@{/home.do}">메인 페이지</a>
+      </div>
+      <div style="border-right: 1px solid white; padding: 0 10px">
+        <a th:href="@{/vote/create.do}">투표안건 만들기</a>
+      </div>
+      <div style="border-right: 1px solid white; padding: 0 10px">
+        <a th:href="@{/announce/create.do}">공지사항 만들기</a>
+      </div>
+    </div>
+    <a th:href="@{/}">로그인하러가기</a>
+  </div>
+</header>

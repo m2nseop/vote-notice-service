@@ -1,10 +1,13 @@
 package com.univ.VoteProject.Main;
 
+import com.univ.VoteProject.Model.Student;
 import com.univ.VoteProject.User.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +26,13 @@ public class MainController {
 
     // 일단은 그냥 로그인 화면으로 가는 것으로 ㄱㄱ
     @RequestMapping(value = "/")
-    public ModelAndView index(HttpServletResponse response, HttpServletRequest request) {
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+
         ModelAndView mv = new ModelAndView();
+//        if(session.getId() != null){
+//            mv.setViewName("content/home");
+//            return mv;
+//        }
         mv.setViewName("login/login");
         return mv;
     }
@@ -39,6 +47,22 @@ public class MainController {
     public ModelAndView goHome(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
 
+        HttpSession session = request.getSession();
+        Student loginMember = (Student) session.getAttribute("loginMember");
+
+        if (loginMember != null) {
+            // 로그인 정보 활용
+            String username = loginMember.getId();
+            System.out.println(username);
+            System.out.println("로그인됨");
+            // 추가적인 작업 수행...
+
+//            return ResponseEntity.ok("Welcome " + username + " to another page!");
+        } else {
+            System.out.println("정보 날라감");
+            // 로그인되지 않은 경우 처리
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
         mv.setViewName("content/home");
 
         return mv;
