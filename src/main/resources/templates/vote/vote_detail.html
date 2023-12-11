@@ -51,10 +51,13 @@
 
 
     <!-- target대상만 볼 수 있음 -->
-    <div th:if="${session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope}">
+    <div th:if="${isVoted == false && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
         <button id="voteButton">
             투표하기
         </button>
+    </div>
+    <div th:if="${isVoted == true && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
+        <strong>투표를 완료하셨습니다.</strong>
     </div>
 
     <div class="modal" id="voteModal" tabindex="-1" role="dialog">

@@ -22,4 +22,8 @@ public class VoteService {
     public void castVote(int voteId, String voterId, String voterName, int decision){
         voteRepo.castVote(voteId, voterId, voterName, decision);
     }
+
+    public int checkVoteById(String voterId){
+        return voteRepo.checkVoteById(voterId);
+    }
 }

@@ -15,4 +15,6 @@ public interface VoteRepository {
     Vote getVoteById(int voteId);
 
     void castVote(int voteId, String voterId, String voterName,int decision);
+
+    int checkVoteById(String voterId);
 }

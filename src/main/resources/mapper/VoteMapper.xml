@@ -21,4 +21,9 @@
         INSERT INTO vote_history (vote_id, voter_id, voter_name, decision, vote_date)
         VALUES (#{voteId}, #{voterId}, #{voterName},#{decision}, NOW())
     </insert>
+
+    <select id="checkVoteById">
+        SELECT COUNT(*) FROM vote_history
+        WHERE voter_id = #{voterId}
+    </select>
 </mapper>
