@@ -12,6 +12,7 @@ public class Student {
     private String name;
     private String email;
     private int status;
+    private int auth;
     private int position;
     private String college_name;
     private String dept_name;
@@ -51,6 +52,18 @@ public class Student {
     }
 
     public String getDeptName() {
+        return dept_name;
+    }
+
+    public int getAuth() {
+        return auth;
+    }
+
+    public String getCollege_name() {
+        return college_name;
+    }
+
+    public String getDept_name() {
         return dept_name;
     }
 }

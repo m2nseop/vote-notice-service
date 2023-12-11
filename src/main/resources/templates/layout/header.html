@@ -13,10 +13,10 @@
       <div style="border-right: 1px solid white; padding: 0 10px">
         <a th:href="@{/home.do}">메인 페이지</a>
       </div>
-      <div style="border-right: 1px solid white; padding: 0 10px">
+      <div style="border-right: 1px solid white; padding: 0 10px" th:if="${session.loginMember.auth == 1}">
         <a th:href="@{/vote/create.do}">투표안건 만들기</a>
       </div>
-      <div style="border-right: 1px solid white; padding: 0 10px">
+      <div style="border-right: 1px solid white; padding: 0 10px" th:if="${session.loginMember.auth == 1}">
         <a th:href="@{/announce/create.do}">공지사항 만들기</a>
       </div>
     </div>
