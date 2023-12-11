@@ -11,4 +11,14 @@
     <select id="getVoteList" resultType="Vote">
         SELECT * FROM vote_list
     </select>
+
+    <select id="getVoteById" parameterType="int" resultType="Vote">
+        SELECT * FROM vote_list
+        WHERE vote_id = #{voteId}
+    </select>
+
+    <insert id="castVote">
+        INSERT INTO vote_history (vote_id, voter_id, voter_name, decision, vote_date)
+        VALUES (#{voteId}, #{voterId}, #{voterName},#{decision}, NOW())
+    </insert>
 </mapper>

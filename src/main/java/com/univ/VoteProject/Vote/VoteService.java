@@ -15,4 +15,11 @@ public class VoteService {
     }
 
     public List<Vote> getVoteList() { return voteRepo.getVoteList();}
+
+    public Vote getVoteById(int voteId){
+        return voteRepo.getVoteById(voteId);
+    }
+    public void castVote(int voteId, String voterId, String voterName, int decision){
+        voteRepo.castVote(voteId, voterId, voterName, decision);
+    }
 }

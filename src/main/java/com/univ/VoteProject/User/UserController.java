@@ -29,10 +29,10 @@ public class UserController {
 
         // 2. 로그인 성공
         Student member = userService.login(loginRequest.getId(), loginRequest.getPassword());
+        System.out.println(member.getDeptName());
         if (member != null) {
             HttpSession session = request.getSession();
             session.setAttribute("loginMember", member);
-
             // 로그인 성공 시 로그인 시도 횟수 초기화
 //            loginAttemptRepository.resetLoginAttempts(loginRequest.getId());
 

@@ -11,4 +11,8 @@ public interface VoteRepository {
     void createVoteAgenda(Vote vote);
 
     List<Vote> getVoteList();
+
+    Vote getVoteById(int voteId);
+
+    void castVote(int voteId, String voterId, String voterName,int decision);
 }
