@@ -59,6 +59,9 @@
     <div th:if="${isVoted == true && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
         <strong>투표를 완료하셨습니다.</strong>
     </div>
+    <div th:if="${session.loginMember.deptName != vote.targetScope || session.loginMember.collegeName != vote.targetScope} ">
+        <strong>투표 참여대상이 아닙니다.</strong>
+    </div>
 
     <div class="modal" id="voteModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
