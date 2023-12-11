@@ -3,21 +3,21 @@ package com.univ.VoteProject.Model;
 import java.time.LocalDateTime;
 
 public class Vote {
-    private int voteId;
+    private int vote_id;
     private String id;
     private String title;
     private String content;
-    private int mediaId;
-    private LocalDateTime votePeriod;
-    private String targetScope;
-    private String attendanceType;
-    private String anonymityType;
-    private int qrId;
+    private int media_id;
+    private LocalDateTime vote_period;
+    private String target_scope;
+    private String attendance_type;
+    private String anonymity_type;
+    private int qr_id;
 
     // Getter와 Setter 메서드
 
     public int getVoteId() {
-        return voteId;
+        return vote_id;
     }
 
     public String getId() {
@@ -35,31 +35,31 @@ public class Vote {
     }
 
     public int getMediaId() {
-        return mediaId;
+        return media_id;
     }
 
     public LocalDateTime getVotePeriod() {
-        return votePeriod;
+        return vote_period;
     }
 
     public String getTargetScope() {
-        return targetScope;
+        return target_scope;
     }
 
     public String getAttendanceType() {
-        return attendanceType;
+        return attendance_type;
     }
 
     public String getAnonymityType() {
-        return anonymityType;
+        return anonymity_type;
     }
 
     public int getQrId() {
-        return qrId;
+        return qr_id;
     }
 
     public void setVoteId(int voteId) {
-        this.voteId = voteId;
+        this.vote_id = voteId;
     }
 
     public void setId(String id) {
@@ -71,26 +71,26 @@ public class Vote {
     }
 
     public void setMediaId(int mediaId) {
-        this.mediaId = mediaId;
+        this.media_id = mediaId;
     }
 
     public void setVotePeriod(LocalDateTime votePeriod) {
-        this.votePeriod = votePeriod;
+        this.vote_period = votePeriod;
     }
 
     public void setTargetScope(String targetScope) {
-        this.targetScope = targetScope;
+        this.target_scope = targetScope;
     }
 
     public void setAttendanceType(String attendanceType) {
-        this.attendanceType = attendanceType;
+        this.attendance_type = attendanceType;
     }
 
     public void setAnonymityType(String anonymityType) {
-        this.anonymityType = anonymityType;
+        this.anonymity_type = anonymityType;
     }
 
     public void setQrId(int qrId) {
-        this.qrId = qrId;
+        this.qr_id = qrId;
     }
 }

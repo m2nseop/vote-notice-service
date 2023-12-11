@@ -13,8 +13,8 @@ public class Student {
     private String email;
     private int status;
     private int position;
-    private String collegeName;
-    private String deptName;
+    private String college_name;
+    private String dept_name;
 
 //    public void encodingPassword(PasswordEncoder passwordEncoder) {
 //        if (StringUtils.isEmpty(password)) {
@@ -47,10 +47,10 @@ public class Student {
     }
 
     public String getCollegeName() {
-        return collegeName;
+        return college_name;
     }
 
     public String getDeptName() {
-        return deptName;
+        return dept_name;
     }
 }

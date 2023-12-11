@@ -1,6 +1,7 @@
 package com.univ.VoteProject.Vote;
 
 import com.univ.VoteProject.Model.Vote;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface VoteRepository {
     void createVoteAgenda(Vote vote);
 
-    Vote getVoteList();
+    List<Vote> getVoteList();
 }

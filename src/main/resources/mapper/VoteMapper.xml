@@ -4,8 +4,8 @@
 <mapper namespace="com.univ.VoteProject.Vote.VoteRepository">
     <!-- 투표 안건 생성 -->
     <insert id="createVoteAgenda" parameterType="Vote">
-        INSERT INTO vote_list (id, title, media_id, vote_period, target_scope, attendance_type, anonymity_type, qr_id)
-        VALUES (#{id}, #{title}, #{mediaId}, #{votePeriod}, #{targetScope}, #{attendanceType}, #{anonymityType}, #{qrId})
+        INSERT INTO vote_list (id, title, content, media_id, vote_period, target_scope, attendance_type, anonymity_type, qr_id)
+        VALUES (#{id}, #{title}, #{content}, #{mediaId}, #{votePeriod}, #{targetScope}, #{attendanceType}, #{anonymityType}, #{qrId})
     </insert>
 
     <select id="getVoteList" resultType="Vote">

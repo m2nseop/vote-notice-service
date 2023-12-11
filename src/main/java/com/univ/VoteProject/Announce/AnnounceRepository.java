@@ -1,6 +1,7 @@
 package com.univ.VoteProject.Announce;
 
 import com.univ.VoteProject.Model.Announce;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface AnnounceRepository {
     void createAnnounceAgenda(Announce announce);
 
-    Announce getAnnounceList();
+    List<Announce> getAnnounceList();
 }

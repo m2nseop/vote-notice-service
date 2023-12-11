@@ -1,5 +1,6 @@
 package com.univ.VoteProject.Main;
 
+import com.univ.VoteProject.DTO.MainDTO;
 import com.univ.VoteProject.Model.Student;
 import com.univ.VoteProject.User.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    MainService mainService;
 
 //    @RequestMapping(value = "/")
 //    public String index(HttpServletResponse response, HttpServletRequest request) {
@@ -43,7 +47,7 @@ public class MainController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/home.do", method= RequestMethod.GET)
+    @RequestMapping(value = "/home.do", method = RequestMethod.GET)
     public ModelAndView goHome(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
 
@@ -53,18 +57,29 @@ public class MainController {
         if (loginMember != null) {
             // 로그인 정보 활용
             String username = loginMember.getId();
-            System.out.println(username);
+//            System.out.println(username);
             System.out.println("로그인됨");
             // 추가적인 작업 수행...
-
-//            return ResponseEntity.ok("Welcome " + username + " to another page!");
         } else {
             System.out.println("정보 날라감");
+            session.invalidate();
             // 로그인되지 않은 경우 처리
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+            // 로그인 페이지로 리다이렉트 또는 예외 처리 등을 수행할 수 있습니다.
+            mv.setViewName("redirect:/"); // 예시: 로그인 페이지로 리다이렉트
+            return mv;
         }
-        mv.setViewName("content/home");
 
+        mv.addObject("voteList", mainService.getVoteList()); // mainDTO를 "mainDTO"라는 이름으로 추가
+        mv.addObject("announceList", mainService.getAnnounceList());
+        System.out.println("voteList : "  + mainService.getVoteList().get(1).getTitle());
+        System.out.println("voteList : "  + mainService.getVoteList().get(1).getContent());
+        System.out.println("voteList : "  + mainService.getVoteList().get(1).getVotePeriod());
+        System.out.println("voteList : "  + mainService.getVoteList().get(1).getTargetScope());
+        System.out.println("voteList : "  + mainService.getVoteList().get(1).getAttendanceType());
+        System.out.println("voteList : "  + mainService.getVoteList().get(1).getAnonymityType());
+        System.out.println();
+        // home 뷰로 이동
+        mv.setViewName("content/home");
         return mv;
     }
 }

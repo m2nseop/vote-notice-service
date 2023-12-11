@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,15 +9,14 @@
         .content {
             display: flex;
             flex-wrap: wrap;
-            margin-x: auto;
+            margin: auto;
         }
 
         .list-container {
-            width: 45%; /* 각 목록이 50%의 너비를 가지도록 설정 */
+            width: 45%;
             border-right: 1px solid white;
         }
 
-        /* 각 목록의 스타일을 추가적으로 설정할 수 있습니다. */
         .list-container h2 {
             color: #333;
             border-bottom: 1px solid white;
@@ -27,7 +26,6 @@
         /* 필요에 따라 더 많은 스타일을 추가할 수 있습니다. */
     </style>
 </head>
-<link>
 <body>
 <div th:replace="layout/header :: header"></div>
 <div layout:fragment="content" class="content">
@@ -35,8 +33,36 @@
         <div>
             <h2>투표 안건 목록</h2>
         </div>
-        <div style="height: 600px">
-
+        <div style="padding-bottom: 30px">
+            <ul th:if="${voteList != null}">
+                <li th:each="vote : ${voteList}" style="border-bottom: 1px solid red; margin-bottom: 10px;padding-bottom: 10px">
+                    <div>
+                        <span>[제목] </span><span th:text="${vote.title}"></span>
+                    </div>
+                    <div>
+                        <span>[내용] </span><span th:text="${vote.content}"></span>
+                    </div>
+                    <div>
+                        <span>[작성자] </span><span th:text="${vote.id}"></span>
+                    </div>
+                    <div>
+                        <span>[투표 기간] </span>
+                        <span th:text="${#temporals.format(vote.votePeriod, 'yyyy-MM-dd HH:mm')}"></span>
+                    </div>
+                    <div>
+                        <span>[투표 자격 대상] </span><span th:text="${vote.targetScope}"></span>
+                    </div>
+                    <div>
+                        <span>[대변/비대면] </span><span th:text="${vote.attendanceType}"></span>
+                    </div>
+                    <div>
+                        <span>[기명/무기명] </span><span th:text="${vote.anonymityType}"></span>
+                    </div>
+                    <div>
+                        <span>[qr코드] </span><span th:text="${vote.qrId}"></span>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -44,8 +70,26 @@
         <div>
             <h2>공지사항 목록</h2>
         </div>
-        <div style="height: 200px">
-
+        <div style="padding-bottom: 30px">
+            <ul th:if="${announceList != null}">
+                <li th:each="announce : ${announceList}" style="border-bottom: 1px solid red; margin-bottom: 10px;padding-bottom: 10px">
+                    <div>
+                        <span>[작성자] </span><span th:text="${announce.id}"></span>
+                    </div>
+                    <div>
+                        <span>[제목] </span><span th:text="${announce.annTitle}"></span>
+                    </div>
+                    <div>
+                        <span>[내용] </span><span th:text="${announce.annTitle}"></span>
+                    </div>
+                    <div>
+                        <span>[기한] </span><span th:text="${announce.annPeriod}"></span>
+                    </div>
+                    <div>
+                        <span>[공지 대상] </span><span th:text="${announce.targetScope}"></span>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

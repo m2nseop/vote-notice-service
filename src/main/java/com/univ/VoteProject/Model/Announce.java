@@ -1,43 +1,42 @@
 package com.univ.VoteProject.Model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Announce {
 
-    private int annId;
+    private int ann_id;
 
     private String id;
 
-    private String annTitle;
+    private String ann_title;
 
-    private String annContent;
+    private String ann_content;
 
-    private LocalDateTime annPeriod;
+    private LocalDateTime ann_period;
 
-    private int mediaId;
+    private int media_id;
 
-    private String targetScope;
+    private String target_scope;
 
     public String getAnnContent() {
-        return annContent;
+        return ann_content;
     }
 
     public void setAnnContent(String annContent) {
-        this.annContent = annContent;
+        this.ann_content = annContent;
     }
 
     // 게터와 세터 메소드들
     public int getAnnId() {
-        return annId;
+        return this.ann_id;
     }
 
     public void setAnnId(int annId) {
-        this.annId = annId;
+        this.ann_id = annId;
     }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(String id) {
@@ -45,35 +44,35 @@ public class Announce {
     }
 
     public String getAnnTitle() {
-        return annTitle;
+        return this.ann_title;
     }
 
     public void setAnnTitle(String annTitle) {
-        this.annTitle = annTitle;
+        this.ann_title = annTitle;
     }
 
     public LocalDateTime getAnnPeriod() {
-        return annPeriod;
+        return ann_period;
     }
 
     public void setAnnPeriod(LocalDateTime annPeriod) {
-        this.annPeriod = annPeriod;
+        this.ann_period = annPeriod;
     }
 
     public int getMediaId() {
-        return mediaId;
+        return media_id;
     }
 
     public void setMediaId(int mediaId) {
-        this.mediaId = mediaId;
+        this.media_id = mediaId;
     }
 
     public String getTargetScope() {
-        return targetScope;
+        return target_scope;
     }
 
     public void setTargetScope(String targetScope) {
-        this.targetScope = targetScope;
+        this.target_scope = targetScope;
     }
 }
 

@@ -29,16 +29,11 @@ public class VoteController {
     public String createVoteAgenda(@ModelAttribute Vote vote, HttpSession session) {
         Student loginMember = (Student) session.getAttribute("loginMember");
 
-        vote.setId(loginMember.getId());
+        System.out.println(loginMember.getName());
+        vote.setId(loginMember.getName());
 
         voteService.createVoteAgenda(vote);
 
-        System.out.println("title: " + vote.getTitle());
-        System.out.println("votePeriod: " + vote.getVotePeriod());
-        System.out.println("targetScope: " + vote.getTargetScope());
-        System.out.println("attendanceType: " + vote.getAttendanceType());
-        System.out.println("anonymityType: " + vote.getAnonymityType());
-        System.out.println("qrId: " + vote.getQrId());
         return "redirect:/home.do";
     }
 

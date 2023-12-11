@@ -26,11 +26,7 @@ public class AnnounceController {
 
         Student loginMember = (Student) session.getAttribute("loginMember");
 
-        announce.setId(loginMember.getId());
-        System.out.println(announce.getAnnTitle());
-        System.out.println(announce.getAnnTitle());
-        System.out.println(announce.getAnnTitle());
-        System.out.println(announce.getAnnTitle());
+        announce.setId(loginMember.getName());
 
         announceService.createAnnounceAgenda(announce);
 
