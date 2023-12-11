@@ -50,9 +50,14 @@ public class VoteController {
     }
 
     @PostMapping("/vote/cast/{voteId}")
-    public String castVote(@PathVariable int voteId, @RequestParam String voteOption, HttpSession session){
+    public String castVote(@PathVariable int voteId, @RequestParam String voteOption, @RequestParam String anonymityType, HttpSession session){
         Student loginMember = (Student) session.getAttribute("loginMember");
-        voteService.castVote(voteId, loginMember.getId(), loginMember.getName(),Integer.parseInt(voteOption));
+        System.out.println("됐나?" + anonymityType);
+        if(anonymityType.equals("기명")){
+            voteService.castVote(voteId, loginMember.getId(), loginMember.getName(),Integer.parseInt(voteOption));
+        }else {
+            voteService.castVote(voteId, null, null,Integer.parseInt(voteOption));
+        }
         return "redirect:/vote/detail/" + Integer.toString(voteId);
     }
 }

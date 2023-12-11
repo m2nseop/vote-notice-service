@@ -63,6 +63,7 @@
                 <div class="modal-body">
                     <!-- 찬성, 반대, 기권 선택 폼 -->
                     <form th:action="@{/vote/cast/{voteId}(voteId=${vote.voteId})}" method="post">
+                        <input type="hidden" name="anonymityType" th:value="${vote.anonymityType}">
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="approve" name="voteOption" value="1">
                             <label class="form-check-label" for="approve">찬성</label>
