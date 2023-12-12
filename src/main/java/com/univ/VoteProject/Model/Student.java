@@ -17,12 +17,6 @@ public class Student {
     private String college_name;
     private String dept_name;
 
-//    public void encodingPassword(PasswordEncoder passwordEncoder) {
-//        if (StringUtils.isEmpty(password)) {
-//            return;
-//        }
-//        password = passwordEncoder.encode(password);
-//    }
     public String getId() {
         return id;
     }

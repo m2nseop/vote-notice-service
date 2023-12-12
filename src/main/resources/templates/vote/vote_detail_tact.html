@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>투표 정보</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Bootstrap JS and Popper.js -->
+
+  <!--    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+</head>
+<body>
+<div>
+  <div th:replace="layout/header :: header"></div>
+
+  <div>
+    <span>[제목] </span><span th:text="${vote.title}"></span>
+  </div>
+  <div>
+    <span>[내용] </span><span th:text="${vote.content}"></span>
+  </div>
+  <div>
+    <span>[작성자] </span><span th:text="${vote.id}"></span>
+  </div>
+  <div>
+    <span>[투표 기간] </span>
+    <span th:text="${#temporals.format(vote.votePeriod, 'yyyy-MM-dd HH:mm')}"></span>
+  </div>
+  <div>
+    <span>[투표 자격 대상] </span><span th:text="${vote.targetScope}"></span>
+  </div>
+  <div>
+    <span>[대변/비대면] </span><span th:text="${vote.attendanceType}"></span>
+  </div>
+  <div>
+    <span>[기명/무기명] </span><span th:text="${vote.anonymityType}"></span>
+  </div>
+  <div>
+    [ 총 유권자 수 ] 필요할듯
+  </div>
+  <div>
+    [ 투표 진행율 ] 필요할듯
+  </div>
+
+  <!-- target대상만 볼 수 있음 -->
+  <div th:if="${isVoted == false && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
+    <button id="voteButton">
+      투표하기
+    </button>
+  </div>
+  <div th:if="${isVoted == true && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
+    <strong>투표를 완료하셨습니다.</strong>
+  </div>
+  <div th:if="${session.loginMember.deptName != vote.targetScope && session.loginMember.collegeName != vote.targetScope} ">
+    <strong>투표 참여대상이 아닙니다.</strong>
+  </div>
+
+  <div class="modal" id="voteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <!-- 찬성, 반대, 기권 선택 폼 -->
+          <form th:action="@{/tactVote/cast/{voteId}(voteId=${vote.voteId})}" method="post">
+            <input type="hidden" name="anonymityType" th:value="${vote.anonymityType}">
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="approve" name="voteOption" value="1">
+              <label class="form-check-label" for="approve">찬성</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="reject" name="voteOption" value="2">
+              <label class="form-check-label" for="reject">반대</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="abstain" name="voteOption" value="3">
+              <label class="form-check-label" for="abstain">기권</label>
+            </div>
+            <button type="submit" class="btn btn-primary">투표 제출</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+  document.getElementById('voteButton').addEventListener('click', function() {
+    var myModal = new bootstrap.Modal(document.getElementById('voteModal'));
+    myModal.show();
+  });
+</script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.univ.VoteProject.Model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Vote {
     private int vote_id;
@@ -12,7 +13,7 @@ public class Vote {
     private String target_scope;
     private String attendance_type;
     private String anonymity_type;
-    private int qr_id;
+    private String qr_token;
 
     // Getter와 Setter 메서드
 
@@ -54,8 +55,8 @@ public class Vote {
         return anonymity_type;
     }
 
-    public int getQrId() {
-        return qr_id;
+    public String getQrToken() {
+        return qr_token;
     }
 
     public void setVoteId(int voteId) {
@@ -90,7 +91,7 @@ public class Vote {
         this.anonymity_type = anonymityType;
     }
 
-    public void setQrId(int qrId) {
-        this.qr_id = qrId;
+    public void setQrToken(String qrId) {
+        this.qr_token = qrId;
     }
 }

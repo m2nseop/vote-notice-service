@@ -4,8 +4,8 @@
 <mapper namespace="com.univ.VoteProject.Vote.VoteRepository">
     <!-- 투표 안건 생성 -->
     <insert id="createVoteAgenda" parameterType="Vote">
-        INSERT INTO vote_list (id, title, content, media_id, vote_period, target_scope, attendance_type, anonymity_type, qr_id)
-        VALUES (#{id}, #{title}, #{content}, #{mediaId}, #{votePeriod}, #{targetScope}, #{attendanceType}, #{anonymityType}, #{qrId})
+        INSERT INTO vote_list (id, title, content, media_id, vote_period, target_scope, attendance_type, anonymity_type, qr_token)
+        VALUES (#{id}, #{title}, #{content}, #{mediaId}, #{votePeriod}, #{targetScope}, #{attendanceType}, #{anonymityType}, null)
     </insert>
 
     <select id="getVoteList" resultType="Vote">
@@ -17,6 +17,11 @@
         WHERE vote_id = #{voteId}
     </select>
 
+    <select id="getVoteByToken" parameterType="String" resultType="Vote">
+        SELECT * FROM vote_list
+        WHERE qr_token = #{token}
+    </select>
+
     <insert id="castVote">
         INSERT INTO vote_history (vote_id, voter_id, voter_name, decision, vote_date)
         VALUES (#{voteId}, #{voterId}, #{voterName},#{decision}, NOW())
@@ -24,6 +29,12 @@
 
     <select id="checkVoteById">
         SELECT COUNT(*) FROM vote_history
-        WHERE voter_id = #{voterId}
+        WHERE voter_id = #{voterId} and vote_id = #{voteId}
     </select>
+
+    <update id="updateQrToken">
+        UPDATE vote_list
+        SET qr_token = '${token}'
+        WHERE vote_id = ${voteId}
+    </update>
 </mapper>

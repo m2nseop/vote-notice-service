@@ -59,9 +59,6 @@
                         <span>[기명/무기명] </span><span th:text="${vote.anonymityType}"></span>
                     </div>
                     <div>
-                        <span>[qr코드] </span><span th:text="${vote.qrId}"></span>
-                    </div>
-                    <div>
                         <a th:href="@{/vote/detail/{voteId}(voteId=${vote.voteId})}">
                             <span>[자세히 보기]</span>
                         </a>

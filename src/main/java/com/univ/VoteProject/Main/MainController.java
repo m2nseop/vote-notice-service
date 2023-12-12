@@ -71,13 +71,6 @@ public class MainController {
 
         mv.addObject("voteList", mainService.getVoteList()); // mainDTO를 "mainDTO"라는 이름으로 추가
         mv.addObject("announceList", mainService.getAnnounceList());
-        System.out.println("voteList : "  + mainService.getVoteList().get(1).getTitle());
-        System.out.println("voteList : "  + mainService.getVoteList().get(1).getContent());
-        System.out.println("voteList : "  + mainService.getVoteList().get(1).getVotePeriod());
-        System.out.println("voteList : "  + mainService.getVoteList().get(1).getTargetScope());
-        System.out.println("voteList : "  + mainService.getVoteList().get(1).getAttendanceType());
-        System.out.println("voteList : "  + mainService.getVoteList().get(1).getAnonymityType());
-        System.out.println();
         // home 뷰로 이동
         mv.setViewName("content/home");
         return mv;
