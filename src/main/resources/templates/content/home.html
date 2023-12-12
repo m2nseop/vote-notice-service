@@ -36,6 +36,12 @@
         <div style="padding-bottom: 30px">
             <ul th:if="${voteList != null}">
                 <li th:each="vote : ${voteList}" style="border-bottom: 1px solid red; margin-bottom: 10px;padding-bottom: 10px">
+                    <a th:href="@{/vote/update/{voteId}(voteId=${vote.voteId})}">
+                        수정
+                    </a>
+                    <a th:href="@{/vote/delete/{voteId}(voteId=${vote.voteId})}">
+                        삭제
+                    </a>
                     <div>
                         <span>[제목] </span><span th:text="${vote.title}"></span>
                     </div>

@@ -53,7 +53,7 @@
 
 
     <!-- target대상만 볼 수 있음 -->
-    <div th:if="${vote.attendanceType == '비대면' && tisVoted == false && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
+    <div th:if="${vote.attendanceType == '비대면' && isVoted == false && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
         <button id="voteButton">
             투표하기
         </button>

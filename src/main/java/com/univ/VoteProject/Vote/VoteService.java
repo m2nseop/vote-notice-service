@@ -49,4 +49,7 @@ public class VoteService {
         return "/vote/detail/" + token;
     }
 
+    public void deleteVote(int voteId){
+        voteRepo.deleteVote(voteId);
+    }
 }

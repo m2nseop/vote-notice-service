@@ -37,4 +37,9 @@
         SET qr_token = '${token}'
         WHERE vote_id = ${voteId}
     </update>
+
+    <delete id="deleteVote">
+        DELETE FROM vote_list
+        WHERE vote_id = #{voteId}
+    </delete>
 </mapper>

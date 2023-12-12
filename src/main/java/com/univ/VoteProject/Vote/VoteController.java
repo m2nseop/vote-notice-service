@@ -119,4 +119,16 @@ public class VoteController {
         Vote vote = voteService.getVoteById(voteId);
         return "redirect:/tactVote/detail/" + vote.getQrToken();
     }
+
+    @GetMapping("/vote/delete/{voteId}")
+    public String deleteVote(@PathVariable int voteId){
+        System.out.println("들어오긴 하니?");
+        voteService.deleteVote(voteId);
+        return "redirect:/home.do";
+    }
+
+//    @PostMapping("/vote/update/{voteId}")
+//    public String updateVote(@PathVariable int voteId){
+//
+//    }
 }
