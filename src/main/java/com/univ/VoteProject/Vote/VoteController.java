@@ -127,8 +127,20 @@ public class VoteController {
         return "redirect:/home.do";
     }
 
-//    @PostMapping("/vote/update/{voteId}")
-//    public String updateVote(@PathVariable int voteId){
-//
-//    }
+    @GetMapping("/vote/update/{voteId}")
+    public String goUpdateVotePage(@PathVariable int voteId, Model model){
+        Vote vote = voteService.getVoteById(voteId);
+        model.addAttribute("vote", vote);
+
+        // update_vote 템플릿(html)으로 이동
+        return "vote/update_vote";
+    }
+
+    @PostMapping("/vote/update/{voteId}")
+    public String updateVote(@PathVariable int voteId, @ModelAttribute("vote") Vote vote){
+        vote.setVoteId(voteId); // 경로 변수로부터 투표 ID를 받아와 설정합니다.
+        voteService.updateVote(vote); // 서비스를 통해 업데이트 메서드를 호출합니다.
+
+        return "redirect:/home.do";
+    }
 }

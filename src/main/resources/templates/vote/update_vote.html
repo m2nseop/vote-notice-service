@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- head 부분 생략 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+</head>
+<body>
+<div>
+    <div th:replace="layout/header :: header"></div>
+    <h2>투표 안건 수정</h2>
+    <form method="post" th:object="${vote}" th:action="@{/vote/update/{voteId}(voteId=${vote.voteId})}">
+        <!-- 제목 수정 -->
+        <div class="input_layout">
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" th:field="*{title}" required>
+        </div>
+
+        <!-- 내용 수정 -->
+        <div class="input_layout">
+            <label for="content">내용</label>
+            <input type="text" id="content" name="content" th:field="*{content}" required>
+        </div>
+
+        <div class="input_layout">
+            <label for="votePeriod">투표 기한</label>
+            <input type="datetime-local" id="votePeriod" name="votePeriod"
+                   th:value="${#temporals.format(vote.votePeriod, 'yyyy-MM-dd HH:mm:ss')}" required>
+        </div>
+
+
+        <div class="input_layout">
+            <label for="targetScope">참여 권한 범위</label>
+            <input type="text" id="targetScope" name="targetScope" th:field="*{targetScope}" required>
+        </div>
+
+        <div class="input_layout">
+            <label for="attendanceType">대면 / 비대면</label>
+            <select id="attendanceType" name="attendanceType" th:field="*{attendanceType}" required>
+                <option value="대면">대면</option>
+                <option value="비대면">비대면</option>
+            </select>
+        </div>
+
+        <div class="input_layout">
+            <label for="anonymityType">기명 / 무기명</label>
+            <select id="anonymityType" name="anonymityType" th:field="*{anonymityType}" required>
+                <option value="기명">기명</option>
+                <option value="무기명">무기명</option>
+            </select>
+        </div>
+
+        <!-- 수정할 투표의 ID를 hidden 필드로 전달 -->
+<!--        <input type="hidden" th:field="*{voteId}"/>-->
+
+
+        <button type="submit">투표 안건 수정</button>
+    </form>
+</div>
+</body>
+</html>

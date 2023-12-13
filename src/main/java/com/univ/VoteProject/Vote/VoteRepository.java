@@ -24,4 +24,6 @@ public interface VoteRepository {
     void updateQrToken(String token, int voteId);
 
     void deleteVote(int voteId);
+
+    void updateVote(Vote vote);
 }

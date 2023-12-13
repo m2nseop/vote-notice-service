@@ -42,4 +42,10 @@
         DELETE FROM vote_list
         WHERE vote_id = #{voteId}
     </delete>
+
+    <update id="updateVote" parameterType="Vote">
+        UPDATE vote_list
+        SET title = #{title}, content = #{content}, vote_period = #{votePeriod},target_scope = #{targetScope}, attendance_type = #{attendanceType},anonymity_type = #{anonymityType}
+        WHERE vote_id = #{voteId}
+    </update>
 </mapper>

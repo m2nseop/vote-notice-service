@@ -52,4 +52,8 @@ public class VoteService {
     public void deleteVote(int voteId){
         voteRepo.deleteVote(voteId);
     }
+
+    public void updateVote(Vote vote){
+        voteRepo.updateVote(vote);
+    }
 }
