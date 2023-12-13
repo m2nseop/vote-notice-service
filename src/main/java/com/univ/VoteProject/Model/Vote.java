@@ -6,6 +6,7 @@ import java.util.UUID;
 public class Vote {
     private int vote_id;
     private String id;
+    private String name;
     private String title;
     private String content;
     private int media_id;
@@ -19,6 +20,14 @@ public class Vote {
 
     public int getVoteId() {
         return vote_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {

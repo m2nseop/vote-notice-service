@@ -49,7 +49,7 @@
                         <span>[내용] </span><span th:text="${vote.content}"></span>
                     </div>
                     <div>
-                        <span>[작성자] </span><span th:text="${vote.id}"></span>
+                        <span>[작성자] </span><span th:text="${vote.name}"></span>
                     </div>
                     <div>
                         <span>[투표 기간] </span>
@@ -81,8 +81,17 @@
         <div style="padding-bottom: 30px">
             <ul th:if="${announceList != null}">
                 <li th:each="announce : ${announceList}" style="border-bottom: 1px solid red; margin-bottom: 10px;padding-bottom: 10px">
+                    <div th:if="${announce.id == session.loginMember.id}">
+                        <a th:href="@{/announce/update/{annId}(annId=${announce.annId})}">
+                            [ 수정 ]
+                        </a>
+                        <a th:href="@{/announce/delete/{annId}(annId=${announce.annId})}">
+                            [ 삭제 ]
+                        </a>
+                    </div>
+
                     <div>
-                        <span>[작성자] </span><span th:text="${announce.id}"></span>
+                        <span>[작성자] </span><span th:text="${announce.name}"></span>
                     </div>
                     <div>
                         <span>[제목] </span><span th:text="${announce.annTitle}"></span>
@@ -95,6 +104,11 @@
                     </div>
                     <div>
                         <span>[공지 대상] </span><span th:text="${announce.targetScope}"></span>
+                    </div>
+                    <div>
+                        <a th:href="@{/announce/detail/{annId}(annId=${announce.annId})}">
+                            <span>[자세히 보기]</span>
+                        </a>
                     </div>
                 </li>
             </ul>

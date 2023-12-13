@@ -26,7 +26,7 @@
         <span>[내용] </span><span th:text="${vote.content}"></span>
     </div>
     <div>
-        <span>[작성자] </span><span th:text="${vote.id}"></span>
+        <span>[작성자] </span><span th:text="${vote.name}"></span>
     </div>
     <div>
         <span>[투표 기간] </span>
@@ -47,10 +47,6 @@
     <div>
         [ 투표 진행율 ] 필요할듯
     </div>
-    <div>
-        [[${voteUrl}]]
-    </div>
-
 
     <!-- target대상만 볼 수 있음 -->
     <div th:if="${vote.attendanceType == '비대면' && isVoted == false && session.loginMember.deptName == vote.targetScope || session.loginMember.collegeName == vote.targetScope} ">
@@ -99,16 +95,19 @@
         <a th:href="@{/vote/createUrl/{voteId}(voteId=${vote.voteId})}" style="color: blue">
             <span>qr코드 생성</span>
         </a>
-    </div>
+        <div th:if="${vote.qrToken != null}">
+            <p>아래 QR 코드를 스캔하여 투표에 참여하세요.</p>
 
-    <div th:if="${voteUrl != 'http://localhost:8080/vote/detail/null'}">
-        <p>아래 QR 코드를 스캔하여 투표에 참여하세요.</p>
+            <!-- 투표 URL에 토큰이 포함되어 있으므로 이를 QR 코드로 표시 -->
+            <div th:id="qrcode" th:attr="data-vote-url=${voteUrl}">
 
-        <!-- 투표 URL에 토큰이 포함되어 있으므로 이를 QR 코드로 표시 -->
-        <div th:id="qrcode" th:attr="data-vote-url=${voteUrl}">
-
+            </div>
+            <div>
+                [[${voteUrl}]]
+            </div>
         </div>
     </div>
+
 </div>
 <script>
     var voteUrl = $('#qrcode').data('vote-url');
@@ -117,21 +116,6 @@
         width: 128,
         height: 128
     });
-        // function generateQrCode(voteId) {
-        // // AJAX 요청을 통해 URL 생성 컨트롤러 호출
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: '/vote/createUrl/' + voteId,
-        //         success: function(data) {
-        //             // URL 생성이 성공하면 리다이렉트
-        //             // window.location.href = data;
-        //             alert("qr코드가 생성되었습니다.");
-        //         },
-        //         error: function(error) {
-        //             console.error('Error generating QR code URL:', error);
-        //         }
-        //     });
-        // }
 
 
     document.getElementById('voteButton').addEventListener('click', function() {

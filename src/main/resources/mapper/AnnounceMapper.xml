@@ -3,12 +3,27 @@
 
 <mapper namespace="com.univ.VoteProject.Announce.AnnounceRepository">
     <insert id="createAnnounceAgenda" parameterType="Announce">
-        INSERT INTO announce_list (id, ann_title, ann_content, ann_period, media_id, target_scope)
-        VALUES (#{id}, #{annTitle}, #{annContent},#{annPeriod}, #{mediaId}, #{targetScope})
+        INSERT INTO announce_list (id, ann_title, name, ann_content, ann_period, media_id, target_scope)
+        VALUES (#{id}, #{annTitle}, #{name}, #{annContent},#{annPeriod}, #{mediaId}, #{targetScope})
     </insert>
 
     <!-- 회원 상세정보 조회 -->
     <select id="getAnnounceList" resultType="Announce">
         SELECT * FROM announce_list
     </select>
+
+    <select id="getAnnounceById" resultType="Announce">
+        SELECT * FROM announce_list
+        WHERE ann_id = #{annId}
+    </select>
+
+    <update id="updateAnnounce" parameterType="Announce">
+        UPDATE announce_list
+        SET ann_title = #{annTitle}, ann_content = #{annContent}, ann_period = #{annPeriod}, target_scope = #{targetScope}
+        WHERE ann_id = #{annId}
+    </update>
+    <delete id="deleteAnnounce">
+        DELETE FROM announce_list
+        WHERE ann_id = #{annId}
+    </delete>
 </mapper>

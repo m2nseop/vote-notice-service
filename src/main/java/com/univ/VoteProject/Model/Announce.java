@@ -7,7 +7,7 @@ public class Announce {
     private int ann_id;
 
     private String id;
-
+    private String name;
     private String ann_title;
 
     private String ann_content;
@@ -24,6 +24,14 @@ public class Announce {
 
     public void setAnnContent(String annContent) {
         this.ann_content = annContent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     // 게터와 세터 메소드들

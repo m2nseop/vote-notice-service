@@ -34,8 +34,8 @@ public class VoteController {
         Student loginMember = (Student) session.getAttribute("loginMember");
 
         System.out.println(loginMember.getName());
-        vote.setId(loginMember.getName());
-
+        vote.setId(loginMember.getId());
+        vote.setName(loginMember.getName());
         voteService.createVoteAgenda(vote);
 
         return "redirect:/home.do";

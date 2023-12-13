@@ -11,4 +11,10 @@ public interface AnnounceRepository {
     void createAnnounceAgenda(Announce announce);
 
     List<Announce> getAnnounceList();
+
+    Announce getAnnounceById(int annId);
+
+    void updateAnnounce(Announce announce);
+
+    void deleteAnnounce(int annId);
 }
