@@ -1,10 +1,12 @@
 package com.univ.VoteProject.Vote;
 
+import com.univ.VoteProject.File.FileStorageService;
 import com.univ.VoteProject.Model.Student;
 import com.univ.VoteProject.Model.Vote;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 
 @Controller
 public class VoteController {
@@ -20,8 +24,20 @@ public class VoteController {
     @Autowired
     VoteService voteService;
 
+    @Autowired
+    FileStorageService fileStorageService;
     // 나 이런 서비스를 쓸거야
 
+    @PostMapping("/upload")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            System.out.println("파일 비어 있음");
+        }else{
+            System.out.println("파일 ori name : " + file.getOriginalFilename());
+            fileStorageService.saveFile(file);
+        }
+        return "redirect:/";
+    }
     @GetMapping("/vote/create.do")
     public String createVoteForm(Model model) {
         model.addAttribute("vote", new Vote());
@@ -30,13 +46,29 @@ public class VoteController {
     }
 
     @PostMapping("/vote/create.do")
-    public String createVoteAgenda(@ModelAttribute Vote vote, HttpSession session) {
+    public String createVoteAgenda(@ModelAttribute Vote vote, @RequestParam("image") MultipartFile image, @RequestParam("file") MultipartFile file, HttpSession session)
+            throws IOException {
         Student loginMember = (Student) session.getAttribute("loginMember");
 
+        // MultipartFile image
+        // MultipartFile file
         System.out.println(loginMember.getName());
         vote.setId(loginMember.getId());
         vote.setName(loginMember.getName());
         voteService.createVoteAgenda(vote);
+
+        if (!image.isEmpty()) {
+//            String imageName = fileStorageService.saveFile(image);
+            System.out.println("파일이름 : " + file.getOriginalFilename());
+//            vote.setImagePath("/uploads/" + imageName);
+//            voteService.updateImage(vote);
+        }
+
+        if (!file.isEmpty()) {
+//            String fileName = fileStorageService.saveFile(file);
+//            vote.setFilePath("/uploads/" + fileName);
+//            voteService.updateFile(vote);
+        }
 
         return "redirect:/home.do";
     }
@@ -143,4 +175,14 @@ public class VoteController {
 
         return "redirect:/home.do";
     }
+
+//    private String saveFile(MultipartFile file) throws IOException {
+//        // 파일을 서버에 저장하는 로직
+//        // 경로를 반환하거나, 파일 데이터를 바이트 배열로 변환하여 저장하는 방식 등을 선택
+//        // 여기에서는 단순히 파일의 이름을 유지하고, 서버의 특정 디렉토리에 저장한 후 경로를 반환하는 예시
+//        String fileName = file.getOriginalFilename();
+//        String filePath = "/uploads/" + fileName; // 저장할 경로
+//        file.transferTo(new File("경로/" + fileName)); // 실제 파일 저장
+//        return filePath;
+//    }
 }
