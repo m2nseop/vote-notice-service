@@ -26,4 +26,8 @@ public interface VoteRepository {
     void deleteVote(int voteId);
 
     void updateVote(Vote vote);
+
+    void updateVoteMediaId(int voteId, int mediaId);
+
+    void insertAttendHistory(int voteId, String voterId);
 }

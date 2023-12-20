@@ -17,4 +17,6 @@ public interface AnnounceRepository {
     void updateAnnounce(Announce announce);
 
     void deleteAnnounce(int annId);
+
+    void updateAnnounceMediaId(int annId, int mediaId);
 }

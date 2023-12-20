@@ -2,28 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.univ.VoteProject.Announce.AnnounceRepository">
+
+<!--    공지사항 생성 쿼리-->
     <insert id="createAnnounceAgenda" parameterType="Announce">
         INSERT INTO announce_list (id, ann_title, name, ann_content, ann_period, media_id, target_scope)
         VALUES (#{id}, #{annTitle}, #{name}, #{annContent},#{annPeriod}, #{mediaId}, #{targetScope})
     </insert>
 
-    <!-- 회원 상세정보 조회 -->
+<!--    공지사항 리스트 가져오기-->
     <select id="getAnnounceList" resultType="Announce">
         SELECT * FROM announce_list
     </select>
 
+<!--    특정 공지사항 정보 가져오기-->
     <select id="getAnnounceById" resultType="Announce">
         SELECT * FROM announce_list
         WHERE ann_id = #{annId}
     </select>
 
+<!--    공지사항 글 업데이트-->
     <update id="updateAnnounce" parameterType="Announce">
         UPDATE announce_list
         SET ann_title = #{annTitle}, ann_content = #{annContent}, ann_period = #{annPeriod}, target_scope = #{targetScope}
         WHERE ann_id = #{annId}
     </update>
+
+<!--    특정 공지사항 글 삭제-->
     <delete id="deleteAnnounce">
         DELETE FROM announce_list
         WHERE ann_id = #{annId}
     </delete>
+
+<!--    공지사항 생성시 파일 업로드를 하지 않았을 경우 media_id 업데이트 -->
+    <update id="updateAnnounceMediaId">
+        UPDATE announce_list
+        set media_id = #{mediaId}
+        WHERE ann_id = #{annId}
+    </update>
 </mapper>

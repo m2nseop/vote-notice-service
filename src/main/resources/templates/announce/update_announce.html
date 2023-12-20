@@ -1,4 +1,3 @@
-<!-- createAnnounce.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -19,9 +18,7 @@
 <div th:replace="layout/header :: header"></div>
 <div>
     <h2>공지사항 수정</h2>
-    <!-- 폼 시작 -->
-    <form method="post" th:object="${announce}" th:action="@{/announce/update/{annId}(annId=${announce.annId})}">
-        <!-- Announce 속성 입력 -->
+    <form method="post" th:object="${announce}" th:action="@{/announce/update/{annId}(annId=${announce.annId})}" enctype="multipart/form-data">
         <div class="input_layout">
             <label for="annTitle">제목</label>
             <input type="text" id="annTitle" th:field="*{annTitle}" />
@@ -34,27 +31,24 @@
 
         <div class="input_layout">
             <label for="annPeriod">게시 기한</label>
-<!--            <input type="datetime-local" id="annPeriod" th:field="*{annPeriod}" />-->
             <input type="datetime-local" id="annPeriod" name="annPeriod"
                    th:value="${#temporals.format(announce.annPeriod, 'yyyy-MM-dd HH:mm:ss')}" required>
         </div>
-
-        <!--            <div class="input_layout">-->
-        <!--                <label for="mediaId">Media ID:</label>-->
-        <!--                <input type="number" id="mediaId" th:field="*{mediaId}" />-->
-        <!--            </div>-->
 
         <div class="input_layout">
             <label for="targetScope">게시 범위</label>
             <input type="text" id="targetScope" th:field="*{targetScope}" />
         </div>
-
-        <!-- 제출 버튼 -->
+        <div class="input_layout">
+            파일첨부
+            <input type="file" name="file" accept=".txt" multiple>
+        </div>
+        <div class="input_layout">
+            이미지 첨부
+            <input type="file" name="image" accept="image/*" multiple>
+        </div>
         <button type="submit">공지사항 수정</button>
     </form>
-    <!-- 폼 끝 -->
-
-    <!-- 다양한 필요한 내용 추가 -->
 </div>
 </body>
 </html>

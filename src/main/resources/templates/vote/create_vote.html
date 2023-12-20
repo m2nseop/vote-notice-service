@@ -20,7 +20,7 @@
     <div th:replace="layout/header :: header"></div>
     <div>
         <h2>새로운 투표 안건 생성</h2>
-        <form method="post" th:object="${vote}" th:action="@{/vote/create.do}" enctype="multipart/form-data">
+        <form id="voteForm" method="post" th:object="${vote}" th:action="@{/vote/create.do}" enctype="multipart/form-data">
             <div class="input_layout">
                 <label for="title">제목</label>
                 <input type="text" id="title" name="title" th:field="*{title}" required>
@@ -56,22 +56,12 @@
                     <option value="무기명">무기명</option>
                 </select>
             </div>
-
-            <!-- 이미지 업로드 -->
-            <div class="input_layout">
-                <label for="image">이미지 업로드</label>
-                <input type="file" id="image" name="image" accept="image/*">
-            </div>
-
-            <!-- 파일 업로드 -->
-            <div class="input_layout">
-                <label for="file">파일 업로드</label>
-                <input type="file" id="file" name="file">
-            </div>
-
+            파일첨부
+            <input type="file" name="file" accept=".txt" multiple>
+            이미지 첨부
+            <input type="file" name="image" accept="image/*" multiple>
             <button type="submit">투표 안건 생성</button>
         </form>
-
     </div>
 </body>
 </html>

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- head 부분 생략 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
 </head>
@@ -11,14 +10,12 @@
 <div>
     <div th:replace="layout/header :: header"></div>
     <h2>투표 안건 수정</h2>
-    <form method="post" th:object="${vote}" th:action="@{/vote/update/{voteId}(voteId=${vote.voteId})}">
-        <!-- 제목 수정 -->
+    <form method="post" th:object="${vote}" th:action="@{/vote/update/{voteId}(voteId=${vote.voteId})}" enctype="multipart/form-data">
         <div class="input_layout">
             <label for="title">제목</label>
             <input type="text" id="title" name="title" th:field="*{title}" required>
         </div>
 
-        <!-- 내용 수정 -->
         <div class="input_layout">
             <label for="content">내용</label>
             <input type="text" id="content" name="content" th:field="*{content}" required>
@@ -51,11 +48,15 @@
                 <option value="무기명">무기명</option>
             </select>
         </div>
-
-        <!-- 수정할 투표의 ID를 hidden 필드로 전달 -->
-<!--        <input type="hidden" th:field="*{voteId}"/>-->
-
-
+        <input type="hidden" name="mediaId" th:field="*{mediaId}">
+        <div class="input_layout">
+            파일첨부
+            <input type="file" name="file" accept=".txt" multiple>
+        </div>
+        <div class="input_layout">
+            이미지 첨부
+            <input type="file" name="image" accept="image/*" multiple>
+        </div>
         <button type="submit">투표 안건 수정</button>
     </form>
 </div>

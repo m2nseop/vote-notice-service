@@ -1,9 +1,12 @@
 package com.univ.VoteProject.Announce;
 
+import com.univ.VoteProject.Media.MediaService;
 import com.univ.VoteProject.Model.Announce;
+import com.univ.VoteProject.Model.Media;
 import com.univ.VoteProject.Model.Student;
 import com.univ.VoteProject.Model.Vote;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +14,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class AnnounceController {
     @Autowired
     AnnounceService announceService;
+
+    @Autowired
+    MediaService mediaService;
 
     @GetMapping("/announce/create.do")
     public String createAnnounceForm(Model model){
@@ -24,10 +32,14 @@ public class AnnounceController {
     }
 
     @PostMapping("/announce/create.do")
-    public String createAnnounceAgenda(@ModelAttribute Announce announce, HttpSession session){
+    public String createAnnounceAgenda(@ModelAttribute Announce announce, @RequestParam("image") MultipartFile image, @RequestParam("file") MultipartFile file, HttpSession session)
+            throws IOException {
 
         Student loginMember = (Student) session.getAttribute("loginMember");
 
+        int mediaId = mediaService.saveMedia(file, image);
+
+        announce.setMediaId(mediaId);
         announce.setId(loginMember.getId());
         announce.setName(loginMember.getName());
 
@@ -39,28 +51,37 @@ public class AnnounceController {
     @GetMapping("/announce/detail/{annId}")
     public String showVoteDetails(@PathVariable int annId, Model model, HttpSession session) {
         Student loginMember = (Student) session.getAttribute("loginMember");
-        // 여기서 투표 상세 정보를 데이터베이스 등에서 가져오는 로직을 추가
+
         Announce announce = announceService.getAnnounceById(annId);
 
-        // 투표했는지 확인해서 해당 데이터 내용 가지고 감
+        Media media = mediaService.getMediaById(announce.getMediaId());
+
+        model.addAttribute("media", media);
         model.addAttribute("announce", announce);
         return "announce/announce_detail";  // 투표 상세 페이지의 Thymeleaf 템플릿 이름
     }
 
     @GetMapping("/announce/update/{annId}")
     public String goUpdateAnnouncePage(@PathVariable int annId, Model model) {
-        // 여기서 투표 상세 정보를 데이터베이스 등에서 가져오는 로직을 추가
         Announce announce = announceService.getAnnounceById(annId);
 
-        // 투표했는지 확인해서 해당 데이터 내용 가지고 감
+        Media media = mediaService.getMediaById(announce.getMediaId());
+        model.addAttribute("media", media);
         model.addAttribute("announce", announce);
         return "announce/update_announce";  // 투표 상세 페이지의 Thymeleaf 템플릿 이름
     }
 
     @PostMapping("/announce/update/{annId}")
-    public String updateAnnounce(@PathVariable int annId, @ModelAttribute("announce") Announce announce){
-        announce.setAnnId(annId); // 경로 변수로부터 투표 ID를 받아와 설정합니다.
-        announceService.updateAnnounce(announce); // 서비스를 통해 업데이트 메서드를 호출합니다.
+    public String updateAnnounce(
+            @PathVariable int annId,
+            @ModelAttribute("announce") Announce announce,
+            @RequestParam("image") MultipartFile image,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
+        announce.setAnnId(annId);
+
+        mediaService.updateAnnounceMedia(announce.getMediaId(), file, image, annId);
+        announceService.updateAnnounce(announce);
 
         return "redirect:/home.do";
     }

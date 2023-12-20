@@ -19,8 +19,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-//    private Map<String, LoginRequest> loginAttemptsMap = new HashMap<>();
-
     @PostMapping("/user/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
         // 1. 회원 정보 조회
@@ -34,7 +32,6 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("loginMember", member);
             // 로그인 성공 시 로그인 시도 횟수 초기화
-//            loginAttemptRepository.resetLoginAttempts(loginRequest.getId());
 
             return ResponseEntity.ok("/home.do");
         } else {

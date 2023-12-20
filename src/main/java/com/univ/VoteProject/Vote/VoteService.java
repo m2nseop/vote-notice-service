@@ -56,4 +56,8 @@ public class VoteService {
     public void updateVote(Vote vote){
         voteRepo.updateVote(vote);
     }
+
+    public void insertAttendHistory(int voteId, String voterId){
+        voteRepo.insertAttendHistory(voteId, voterId);
+    }
 }

@@ -3,49 +3,71 @@
 
 <mapper namespace="com.univ.VoteProject.Vote.VoteRepository">
     <!-- 투표 안건 생성 -->
-    <insert id="createVoteAgenda" parameterType="Vote">
+    <insert id="createVoteAgenda" parameterType="Vote" useGeneratedKeys="true" keyProperty="vote_id">
         INSERT INTO vote_list (id, title, name, content, media_id, vote_period, target_scope, attendance_type, anonymity_type, qr_token)
         VALUES (#{id}, #{title}, #{name}, #{content}, #{mediaId}, #{votePeriod}, #{targetScope}, #{attendanceType}, #{anonymityType}, null)
     </insert>
 
+<!--    투표 리스트 가져오기-->
     <select id="getVoteList" resultType="Vote">
         SELECT * FROM vote_list
     </select>
 
+<!--    특정 투표 안건 가져오기 -->
     <select id="getVoteById" parameterType="int" resultType="Vote">
         SELECT * FROM vote_list
         WHERE vote_id = #{voteId}
     </select>
 
+<!--    대면 투표글 전용, qr_token 특정 투표 안건 가져오기-->
     <select id="getVoteByToken" parameterType="String" resultType="Vote">
         SELECT * FROM vote_list
         WHERE qr_token = #{token}
     </select>
 
+<!--    투표하기-->
     <insert id="castVote">
         INSERT INTO vote_history (vote_id, voter_id, voter_name, decision, vote_date)
         VALUES (#{voteId}, #{voterId}, #{voterName},#{decision}, NOW())
     </insert>
 
+<!--    투표했는지 체크하기-->
     <select id="checkVoteById">
         SELECT COUNT(*) FROM vote_history
         WHERE voter_id = #{voterId} and vote_id = #{voteId}
     </select>
 
+<!--    작성자가 qr_token 만들었을 경우 업데이트-->
     <update id="updateQrToken">
         UPDATE vote_list
         SET qr_token = '${token}'
         WHERE vote_id = ${voteId}
     </update>
 
+<!--    투표글 삭제-->
     <delete id="deleteVote">
         DELETE FROM vote_list
         WHERE vote_id = #{voteId}
     </delete>
 
+<!--    투표글 업데이트-->
     <update id="updateVote" parameterType="Vote">
         UPDATE vote_list
-        SET title = #{title}, content = #{content}, vote_period = #{votePeriod},target_scope = #{targetScope}, attendance_type = #{attendanceType},anonymity_type = #{anonymityType}
+        SET title = #{title}, content = #{content}, vote_period = #{votePeriod},target_scope = #{targetScope},
+            attendance_type = #{attendanceType},anonymity_type = #{anonymityType}
         WHERE vote_id = #{voteId}
     </update>
+
+<!--    투표글 media_id 등록 -->
+    <update id="updateVoteMediaId">
+        UPDATE vote_list
+        SET media_id = #{mediaId}
+        WHERE vote_id = #{voteId}
+    </update>
+
+<!--    대면 투표했을 경우 참석했다고 insert-->
+    <insert id="insertAttendHistory">
+        INSERT INTO attend_history (vote_id, voter_id, attend_date)
+        VALUES ( #{voteId}, #{voterId}, NOW())
+    </insert>
 </mapper>
